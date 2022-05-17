@@ -11,7 +11,6 @@ const Formbutton = (props) => {
             <Text style={styles.text}>
                 {props.title}
             </Text>
-            
         </TouchableOpacity>
     );
 };

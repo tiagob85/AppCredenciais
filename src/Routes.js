@@ -1,10 +1,11 @@
 import 'react-native-gesture-handler';
 
 import * as React from 'react';
-import {Text, View, Button} from 'react-native';
+import {Text, View, Button, StyleSheet} from 'react-native';
 
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer,useNavigationContainerRef } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 
 /*Importação das páginas*/
 import LogonScreen from './pages/LogonPage';
@@ -14,6 +15,7 @@ import RegisterScreen from './pages/RegisterPage';
 const Stack = createStackNavigator();
 
 const Routes = () => {
+    const navigationRef = useNavigationContainerRef(); 
     return(
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Logon">
@@ -42,7 +44,7 @@ const Routes = () => {
                         headerTintColor: '#fff',
                         headerTitleStyle:{
                             fontWeight: 'bold',
-                        }
+                        },
                     }}
                 />
                 <Stack.Screen 
@@ -63,5 +65,12 @@ const Routes = () => {
         </NavigationContainer>
     );
 };
+
+const styles = StyleSheet.create({
+    BtnStyle:{
+        marginLeft: 20,
+        fontSize: 20
+    }
+})
 
 export default Routes;

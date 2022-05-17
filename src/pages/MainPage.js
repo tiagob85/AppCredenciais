@@ -4,26 +4,39 @@ import {
     Text,
     SafeAreaView,
     StyleSheet,
-    ScrollView
+    ScrollView,
+    TouchableOpacity
 } from 'react-native';
 
-import CardCredential from '../components/CardCredential';
+import { useNavigation } from '@react-navigation/native';
 
-const MainPage = ({navigation}) => {
-    
+import CardCredential from '../components/CardCredential';
+import NewButton from '../components/NewButton';
+
+
+const MainPage = () => {
+    const navigation = useNavigation(); 
+
     return(
-        <ScrollView style={styles.ViewCard}>
-            <CardCredential />
-            <CardCredential />
-            <CardCredential />
-        </ScrollView>        
+        <View style={{flex:1}}>             
+            <ScrollView style={{flex:1}}> 
+                <CardCredential />
+                <CardCredential />
+                <CardCredential />                
+                <CardCredential />
+                <CardCredential />
+            </ScrollView>    
+            <NewButton 
+                customClick={() => navigation.navigate('Edit')}
+            />                           
+        </View>        
     );
 };
 
 const styles = StyleSheet.create({
     ViewCard:{
         backgroundColor: '#002e4d',
-    }
+    },
 });
 
 export default MainPage;
