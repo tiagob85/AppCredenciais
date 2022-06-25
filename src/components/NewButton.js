@@ -1,20 +1,24 @@
 import React from 'react';
 import {
     TouchableOpacity,
-    StyleSheet
+    StyleSheet,
+    Button
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const NewButton = (props) =>{
     return(
-        <TouchableOpacity
-            activeOpacity={0.7}
-            style={styles.TouchableOpacityStyle}
+        <Button 
+            title="Novo"
             onPress={props.customClick}
-        >
-            <Icon style={styles.IconStyle} name="plus-circle" size={80} color="#009933" />                
-        </TouchableOpacity> 
+            style={styles.ButtonStyle}
+            color= '#00b33c'
+            Icon={
+                <Icon 
+                    style={styles.IconStyle} name="plus-circle" size={80} color="#009933" />
+            }
+        />  
     );
 }
 
@@ -42,6 +46,13 @@ const styles = StyleSheet.create({
         bottom: 30,
         marginLeft: 2,
         marginRight: -87,
+    },
+    ButtonStyle:{
+        flex: 1,
+        marginRight: 80,
+        borderRadius: 100,
+        padding: 25,
+        flexDirection: 'row',
     }
 });
 

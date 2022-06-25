@@ -51,7 +51,7 @@ const Routes = () => {
                     name="Edit"
                     component={RegisterScreen}
                     options={{
-                        title: "Edit",
+                        title: "Editar/Criar Registro",
                         headerStyle:{
                             backgroundColor: '#005ce6',
                         },
