@@ -5,13 +5,20 @@ import{
     Text,
     TouchableOpacity,
     ToastAndroid,
+    TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import Clipboard from '@react-native-clipboard/clipboard';
 
-
-const CardCredential = () =>{
+const CardCredential = (props) =>{
+    //Variavel que controla a visibilidade da senha.
+    const [isVisible, setIsVisible] = useState(true);
+    //Variavel que armazena usuário.
+    const [UserInfo, setUserInfo] = useState('');
+    //Variavel que armazena senha.
+    const [UserPassword, setUserPassword] = useState('');
+    
     const navigation = useNavigation(); 
 
     //Função que copia o usuário e senha, e mostra mensagem de sucesso ao copiar as informações.
@@ -22,8 +29,7 @@ const CardCredential = () =>{
         } else {
             Clipboard.setString(informacao)
             ToastAndroid.show("Senha copiada", ToastAndroid.SHORT);
-        }
-        
+        }        
     }
 
     return(
@@ -32,11 +38,38 @@ const CardCredential = () =>{
                 <View style={styles.descriptionText}>
                     <Text style={styles.TitleCard}>Banco Santander</Text>        
                     <TouchableOpacity onPress={()=>{informationcopy(1,"usuario")}}>          
-                        <Text style={styles.TextCard}>Usuario : Usuario</Text>
+                        {/* <Text style={styles.TextCard}>Usuario : Usuario</Text> */}
+                        <View style={styles.ContainerPassword}>
+                            <Text style={styles.TextCard}>
+                                Usuário    :
+                            </Text> 
+                            <TextInput 
+                                style={styles.TextInputStyle}   
+                                onChangeText={(UserInfo)=>setUserInfo(props.uservalue)}                              
+                                value={props.uservalue}
+                            />
+                        </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=>{informationcopy(2,"123456")}}>
-                        <Text style={styles.TextCard}>Senha    : *******</Text>
+                        <View style={styles.ContainerPassword}>
+                            <Text style={styles.TextCard}>
+                                Senha    :
+                            </Text> 
+                            <TextInput 
+                                style={styles.TextInputStyle}
+                                secureTextEntry={isVisible} 
+                                onChangeText={(UserPassword)=>setUserPassword(props.password.value)}
+                                value={props.passwordvalue} 
+                            />
+                            <TouchableOpacity
+                                style={styles.buttonvisible}
+                                onPress={()=>{setIsVisible(!isVisible)}}
+                            >
+                                <Icon style={styles.IconStyleVisible} name={isVisible?'eye-slash':'eye'} size={32} color="#000" />
+                            </TouchableOpacity>
+                        </View>                        
                     </TouchableOpacity>
+
                     <View style={styles.buttonview}>
                         <TouchableOpacity
                             style={styles.StyleButtonErase}
@@ -46,7 +79,11 @@ const CardCredential = () =>{
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.StyleButtonEdit}
-                            onPress={() => navigation.navigate('Edit')}
+                            onPress={() => navigation.navigate('Edit',{
+                                OpId: 1,
+                                user: props.uservalue,
+                                password: props.passwordvalue
+                            })}
                         >
                             <Icon style={styles.IconStyle} name="edit" size={32} color="#fff" />
                             <Text style={styles.TextButtonEdit}>Editar</Text>
@@ -151,6 +188,32 @@ const styles = StyleSheet.create({
         marginLeft: 3,
         marginRight: 10,
         marginBottom: -30,
+    },
+    IconStyleVisible:{
+        marginTop: 2,
+        marginLeft: 3,
+        marginRight: 10,
+        marginBottom: -35,
+    },
+    TextInputStyle:{
+        color: '#000',
+        fontSize: 22,
+        marginLeft: 3,
+        height: 40,
+        margin: 7,
+        padding: 1,
+        
+    },
+    ContainerPassword:{
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    buttonvisible:{
+        marginRight: 5,
+        marginLeft: 5,
+        borderRadius: 10,
+        paddingBottom: 35, 
     }
 });
 
