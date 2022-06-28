@@ -17,10 +17,10 @@ import CardCredential from '../components/CardCredential';
 import NewButton from '../components/NewButton';
 
 const DadosArray = [
-    {id: '1', user: 'usuario 1', password: '123456'},
-    {id: '2', user: 'usuario 2', password: '789101'},
-    {id: '3', user: 'usuario 3', password: 'abc123456'},
-    {id: '4', user: 'usuario 4', password: 'def78901'},
+    {id: '1', user: 'usuario 1', password: '123456', title: 'Santander'},
+    {id: '2', user: 'usuario 2', password: '789101', title: 'Caixa Economica'},
+    {id: '3', user: 'usuario 3', password: 'abc123456', title: 'Senha do Gmail'},
+    {id: '4', user: 'usuario 4', password: 'def78901', title: 'Conta Pix'},
 ];
 
 const MainPage = () => {
@@ -29,7 +29,11 @@ const MainPage = () => {
 
     const ItemView = ({item}) =>{
         return(
-            <CardCredential uservalue={item.user}  passwordvalue={item.password}/>
+            <CardCredential 
+                uservalue={item.user}  
+                passwordvalue={item.password}
+                titlevalue={item.title}
+            />
         );
 
     }
@@ -49,7 +53,13 @@ const MainPage = () => {
                 />
            </View>    
             <NewButton 
-                customClick={() => navigation.navigate('Edit')}
+                customClick={
+                    () => navigation.navigate('Edit',{
+                    OpId: 2,
+                    user: '',
+                    password: '',
+                    titulo: ''
+                })}
             />   
         </SafeAreaView>        
     );

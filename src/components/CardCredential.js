@@ -11,6 +11,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import Clipboard from '@react-native-clipboard/clipboard';
 
+import ButtonForm from './ButtonForm';
+
 const CardCredential = (props) =>{
     //Variavel que controla a visibilidade da senha.
     const [isVisible, setIsVisible] = useState(true);
@@ -18,6 +20,8 @@ const CardCredential = (props) =>{
     const [UserInfo, setUserInfo] = useState('');
     //Variavel que armazena senha.
     const [UserPassword, setUserPassword] = useState('');
+    //Variavel que armazena titulo.
+    const [TitleInfo, setTitleInfo] = useState('');
     
     const navigation = useNavigation(); 
 
@@ -36,12 +40,13 @@ const CardCredential = (props) =>{
         <View style={styles.centeredView}>
             <View style={styles.cardview}>                
                 <View style={styles.descriptionText}>
-                    <Text style={styles.TitleCard}>Banco Santander</Text>        
-                    <TouchableOpacity onPress={()=>{informationcopy(1,"usuario")}}>          
-                        {/* <Text style={styles.TextCard}>Usuario : Usuario</Text> */}
+                     <Text style={styles.TitleCard}>
+                        {props.titlevalue}
+                    </Text>        
+                    <TouchableOpacity onPress={()=>{informationcopy(1,props.uservalue)}}>          
                         <View style={styles.ContainerPassword}>
                             <Text style={styles.TextCard}>
-                                Usuário    :
+                                Usuário  :
                             </Text> 
                             <TextInput 
                                 style={styles.TextInputStyle}   
@@ -50,7 +55,7 @@ const CardCredential = (props) =>{
                             />
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>{informationcopy(2,"123456")}}>
+                    <TouchableOpacity onPress={()=>{informationcopy(2,props.passwordvalue)}}>
                         <View style={styles.ContainerPassword}>
                             <Text style={styles.TextCard}>
                                 Senha    :
@@ -58,7 +63,7 @@ const CardCredential = (props) =>{
                             <TextInput 
                                 style={styles.TextInputStyle}
                                 secureTextEntry={isVisible} 
-                                onChangeText={(UserPassword)=>setUserPassword(props.password.value)}
+                                onChangeText={(UserPassword)=>setUserPassword(props.passwordvalue)}
                                 value={props.passwordvalue} 
                             />
                             <TouchableOpacity
@@ -71,23 +76,26 @@ const CardCredential = (props) =>{
                     </TouchableOpacity>
 
                     <View style={styles.buttonview}>
-                        <TouchableOpacity
-                            style={styles.StyleButtonErase}
-                        >
-                            <Icon style={styles.IconStyle} name="close" size={32} color="#fff" />
-                            <Text style={styles.TextButton}>Apagar</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.StyleButtonEdit}
-                            onPress={() => navigation.navigate('Edit',{
-                                OpId: 1,
-                                user: props.uservalue,
-                                password: props.passwordvalue
-                            })}
-                        >
-                            <Icon style={styles.IconStyle} name="edit" size={32} color="#fff" />
-                            <Text style={styles.TextButtonEdit}>Editar</Text>
-                        </TouchableOpacity>
+                        <ButtonForm 
+                            typebutton="erase"
+                            icon="close"
+                            title="Apagar"
+                            customClick={()=>console.log("Clicou")}
+                        />
+                        <ButtonForm 
+                            typebutton="edit"
+                            icon="edit"                    
+                            title="Editar"
+                            customClick={
+                                    () => navigation.navigate('Edit',
+                                        {
+                                            OpId: 1,
+                                            user: props.uservalue,
+                                            password: props.passwordvalue,
+                                            title: props.titlevalue
+                                        })
+                                    }
+                        />
                     </View>
                 </View>                
             </View>

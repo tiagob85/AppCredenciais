@@ -10,12 +10,18 @@ import InputCredencialText from '../components/InputCredencialText';
 import Formbutton from '../components/Formbutton';
 
 const RegisterPage = ({route, navigation}) =>{
-    const {OpId, user, password} = route.params;
+    const {OpId, user, password, title} = route.params;
 
     return(
         <SafeAreaView style={{flex: 1}}>
             <View style={styles.ViewStyle}>
                 <Text>RegisterPage</Text>
+                <InputCredencialText
+                    style={styles.TextInputStyle}
+                    placeholder="Digite o título..."
+                    placeholderTextColor="#000"
+                    value={title}
+                />
                 <InputCredencialText
                     style={styles.TextInputStyle}
                     placeholder="Digite o usuário..."
