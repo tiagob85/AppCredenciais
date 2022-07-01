@@ -1,17 +1,13 @@
-import React, {useRef, useMemo, useCallback, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
     View,
     Text,
     SafeAreaView,
     StyleSheet,
-    ScrollView,
-    TouchableOpacity,
     FlatList
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
-//import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
-import { Modalize } from 'react-native-modalize';
 
 import CardCredential from '../components/CardCredential';
 import NewButton from '../components/NewButton';
@@ -41,11 +37,6 @@ const MainPage = () => {
     return(
         <SafeAreaView style={{flex:1}}>                           
              <View style={{flex:1}}> 
-                {/* <CardCredential uservalue="Usuario1" passwordvalue="123456"/>
-                <CardCredential uservalue="Usuario"  passwordvalue="123456teste"/>
-                <CardCredential uservalue="Usuario2" passwordvalue="123456"/>                
-                <CardCredential uservalue="Usuario"  passwordvalue="123456"/>
-                <CardCredential uservalue="Usuario"  passwordvalue="123456"/> */}
                 <FlatList 
                     data={listData}
                     renderItem={ItemView}
