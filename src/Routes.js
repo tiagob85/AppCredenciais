@@ -11,6 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import LogonScreen from './pages/LogonPage';
 import MainScreen from './pages/MainPage';
 import RegisterScreen from './pages/RegisterPage';
+import CreateAccount from './pages/CreateAccount';
 
 const Stack = createStackNavigator();
 
@@ -52,6 +53,20 @@ const Routes = () => {
                     component={RegisterScreen}
                     options={{
                         title: "Editar/Criar Registro",
+                        headerStyle:{
+                            backgroundColor: '#005ce6',
+                        },
+                        headerTintColor: '#fff',
+                        headerTitleStyle:{
+                            fontWeight: 'bold',
+                        }
+                    }}
+                />
+                <Stack.Screen 
+                    name="NewAccount"
+                    component={CreateAccount}
+                    options={{
+                        title: "Criar conta",
                         headerStyle:{
                             backgroundColor: '#005ce6',
                         },

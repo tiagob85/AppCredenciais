@@ -1,26 +1,24 @@
-import React from 'react';
-import {
+import React, {useState} from 'react';
+import{
     SafeAreaView,
-    ScrollView,
-    StatusBar,
     StyleSheet,
-    Text,
-    useColorScheme,
-    View  
+    View
 } from 'react-native';
-import Icon from 'react-native-vector-icons/EvilIcons';
+import Icon from 'react-native-vector-icons/Entypo';
 
 import InputCredencialText from '../components/InputCredencialText';
-import Optionbutton from '../components/Optionbutton';
+import Formbutton from '../components/Formbutton';
 
-const LogonPage = ({ navigation }) =>{
-    
+const CreateAccount = ({ navigation }) =>{
+    const [User, setUsuer] = userState('');
+    const [Password, setUserPassword] = userState('');
+
     return(
         <SafeAreaView style={{flex:1}}>
             <View style={styles.ViewStyle}>
                 <View style={styles.IconStyle}>
-                    <Icon  name="user" size={190} color="#000" />
-                </View>                
+                    <Icon  name="new-message" size={120} color="#000" />
+                </View>
                 <InputCredencialText
                     style={styles.TextInputStyle}
                     placeholder="Digite o usuário..."
@@ -32,26 +30,22 @@ const LogonPage = ({ navigation }) =>{
                     placeholderTextColor="#000"
                     secureTextEntry={true}
                 />
-                <View style={styles.ViewButton}>
-                    <Optionbutton 
-                        title="Entrar"
-                        customClick={() => navigation.navigate('Main')}
-                    />   
-                    <Optionbutton 
-                        title="Criar conta"
-                        customClick={() => navigation.navigate('NewAccount')}
-                    />
-                </View>
-            </View>     
+                <Formbutton 
+                    title="Gravar"
+                    customClick={() => navigation.navigate('Logon')}
+                    icon="check"
+                    mode="save"
+                />
+            </View>
         </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
     ViewStyle:{
-      flex: 1,
-      backgroundColor: '#fff',
-      justifyContent: 'center',
+        flex: 1,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
     },
     IconStyle:{
         justifyContent: 'center',
@@ -62,11 +56,7 @@ const styles = StyleSheet.create({
     TextInputStyle:{
       color: '#000000',
       fontSize: 20,
-    },
-    ViewButton:{
-        flexDirection: 'column',        
-        justifyContent: 'space-evenly'
-    }
+    },    
 });
 
-export default LogonPage;
+export default CreateAccount;
